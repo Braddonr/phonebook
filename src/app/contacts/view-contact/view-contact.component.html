@@ -1,0 +1,107 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<nz-card class="ml-16 mr-16">
+    <div>
+    <!-- <button nz-button nzType="primary">Back</button> -->
+    <button (click)="onBack()"><span class="material-symbols-outlined">
+        arrow_back
+        </span>
+    </button>
+    </div>
+<nz-descriptions
+      nzTitle="Contact Details"
+      nzBordered
+      [nzColumn]="{ xxl: 2, xl: 2, lg: 2, md: 1, sm: 1, xs: 1 }"
+      [nzExtra]="edit"
+    >
+      <nz-descriptions-item nzTitle="First Name"  [nzSpan]="2">Jennifer</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Second Name"  [nzSpan]="2">Lopez</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="PhoneNumber">+254704120197</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Email" >braddonr@gmail.com</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Physical Address" [nzSpan]="4">
+        Gb Plaza, Next to Wankan
+        <br />
+        House 14
+        <br />
+        Ruiru
+        <br />
+        Kiambu County
+        <br />
+        Kenya
+        <br />
+      </nz-descriptions-item>
+    </nz-descriptions>
+
+    <!-- <div class="flex flex-auto pt-4 justify-items-end space-x-4">
+        <button nz-button nzType="primary">Edit</button>
+        <button nz-button nzType="primary">Delete</button>
+        </div> -->
+</nz-card>
+
+<ng-template #edit>
+    <div class="flex flex-auto space-x-4">
+    <button nz-button nzType="primary" (click)="showModalEdit(contact)">Edit</button>
+    <button nz-button nzType="primary" nzDanger (click)="showDeleteConfirm(contact)">Delete</button>
+    </div>
+  </ng-template>
+
+  <nz-modal [(nzVisible)]="isVisibleEdit" nzTitle="Edit Contact" (nzOnCancel)="handleCancelEdit()" (nzOnOk)="handleOkEdit()" [nzStyle]="{ top: '80px', width: '600px' }">
+    <ng-container *nzModalContent>
+        <form nz-form [formGroup]="formEdit">
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="firstName">First Name</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="This field is required!">
+                <input
+                  nz-input
+                  placeholder="First Name"
+                  id="firstName"
+                  formControlName="firstName"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="lastName" nzRequired>Last Name</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="This field is required!">
+                <input
+                  nz-input
+                  placeholder="Last Name"
+                  id="lastName"
+                  formControlName="lastName"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="This field is required!">
+                  <input
+                    nz-input
+                    placeholder="Phone Number"
+                    id="phoneNumber"
+                    formControlName="phoneNumber"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="This field is required!">
+                <input
+                nz-input
+                placeholder="Email"
+                id="email"
+                formControlName="email"
+              />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="physicalAddress" nzRequired>Physical Address</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="This field is required!">
+                <input
+                  nz-input
+                  placeholder="Physical Address"
+                  id="physicalAddress"
+                  formControlName="physicalAddress"
+                />
+              </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-container>
+  </nz-modal>

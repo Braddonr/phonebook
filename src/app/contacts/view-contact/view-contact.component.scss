@@ -1,0 +1,20 @@
+//back icon not working for ng zorro so used google icons
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+::ng-deep .ant-descriptions-title {
+    font-size: 24px;
+}
+
+::ng-deep .ant-descriptions-bordered .ant-descriptions-item-label {
+    background-color: #e4e4e4;
+}
+::ng-deep .ant-card{
+    margin: 80px;
+}

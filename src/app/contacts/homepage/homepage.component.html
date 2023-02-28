@@ -1,0 +1,111 @@
+<nz-card class="ml-16 mr-16 mt-6" nzTitle="My Contacts" [nzExtra]="newContact">
+<nz-list class="demo-loadmore-list">
+    <nz-list-item class="flex ">
+        <div class="flex flex-auto justify-between">
+            <div>
+                <input type="text" id="search" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                placeholder="Search a contact" required>
+            </div>
+        <div class="p-2">
+            <nz-radio-group [(ngModel)]="radioValue">
+                <label nz-radio nzValue="list">List</label>
+                <label nz-radio nzValue="grid">Grid</label>
+              </nz-radio-group>
+        </div>
+        </div>
+    </nz-list-item>
+    <nz-list-item *ngFor="let contact of contactList" >
+      <ng-container>
+        <nz-list-item-meta
+          nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          nzDescription="Ant Design, a design language for background applications, is refined by Ant UED Team"
+          (click)="view(contact)"
+        >
+          <nz-list-item-meta-title>
+            <a href="https://ng.ant.design">Test</a>
+          </nz-list-item-meta-title>
+        </nz-list-item-meta>
+        content
+        <ul nz-list-item-actions>
+          <nz-list-item-action><a (click)="view(contact)">View/ More Actions</a></nz-list-item-action>
+        </ul>
+      </ng-container>
+      <!-- <nz-skeleton
+        [nzAvatar]="true"
+        [nzActive]="true"
+        [nzTitle]="false"
+        [nzLoading]="true"
+      ></nz-skeleton> -->
+    </nz-list-item>
+    <div class="loadmore" nz-list-load-more>
+      <button nz-button> Load more</button>
+    </div>
+  </nz-list>
+</nz-card>
+
+<ng-template #newContact>
+      <button nz-button nzType="default" (click)="showModal()"><i nz-icon nzType="plus" nzTheme="outline" style="font-size: 19px; margin-top: 0px;"></i>New Contact</button>&nbsp;
+  </ng-template>
+
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Create New Contact" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzStyle]="{ top: '80px', width: '600px' }">
+    <ng-container *nzModalContent>
+        <form nz-form [formGroup]="formAdd">
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="firstName">First Name</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="This field is required!">
+                <input
+                  nz-input
+                  placeholder="First Name"
+                  id="firstName"
+                  formControlName="firstName"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="lastName" nzRequired>Last Name</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="This field is required!">
+                <input
+                  nz-input
+                  placeholder="Last Name"
+                  id="lastName"
+                  formControlName="lastName"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="This field is required!">
+                  <input
+                    nz-input
+                    placeholder="Phone Number"
+                    id="phoneNumber"
+                    formControlName="phoneNumber"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="This field is required!">
+                <input
+                nz-input
+                placeholder="Email"
+                id="email"
+                formControlName="email"
+              />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="physicalAddress" nzRequired>Physical Address</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="This field is required!">
+                <input
+                  nz-input
+                  placeholder="Physical Address"
+                  id="physicalAddress"
+                  formControlName="physicalAddress"
+                />
+              </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-container>
+  </nz-modal>
