@@ -10,11 +10,54 @@ export class ContactService {
   constructor(private http: HttpClient) { }
 
 
-getData(){
+getAllContacts(){
   return this.http.get<any>("http://localhost:3000/contacts")
   .pipe(
     map((res: any) =>{
   return res;
   }))
 }
+
+getContactById(id: number){
+  return this.http.get<any>("http://localhost:3000/contacts/"+id)
+  .pipe(
+    map((res: any) =>{
+  return res;
+  }))
+}
+
+postContact(data: any){
+  return this.http.post<any>("http://localhost:3000/contacts", data)
+  .pipe(
+    map((res: any) =>{
+  return res;
+  }))
+}
+editContact(data: any, id:number){
+  return this.http.put<any>("http://localhost:3000/contacts/"+id, data)
+  .pipe(
+    map((res: any) =>{
+  return res;
+  }))
+}
+deleteContact(id:number){
+  return this.http.delete<any>("http://localhost:3000/contacts/"+id)
+  .pipe(
+    map((res: any) =>{
+  return res;
+  }))
+}
+
+deleteSeveralContacts(ids: any ){
+  fetch('http://localhost:3000/contacts?id=' + ids.join(','), {
+    method: 'DELETE'
+  })
+    .then(response => {
+      console.log('Items deleted successfully');
+    })
+    .catch(error => {
+      console.error('Error deleting items:', error);
+    });
+  
+  }
 }

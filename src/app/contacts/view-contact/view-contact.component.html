@@ -13,12 +13,12 @@
       [nzColumn]="{ xxl: 2, xl: 2, lg: 2, md: 1, sm: 1, xs: 1 }"
       [nzExtra]="edit"
     >
-      <nz-descriptions-item nzTitle="First Name"  [nzSpan]="2">Jennifer</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="Second Name"  [nzSpan]="2">Lopez</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="PhoneNumber">+254704120197</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="Email" >braddonr@gmail.com</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="Physical Address" [nzSpan]="4">
-        Gb Plaza, Next to Wankan
+      <nz-descriptions-item nzTitle="First Name" [nzSpan]="2">{{viewedContact.firstName}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Last Name"  [nzSpan]="2">{{viewedContact.lastName}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="PhoneNumber">{{viewedContact.phoneNumber}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Email" >{{viewedContact.email}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Physical Address" [nzSpan]="4">{{viewedContact.physicalAddress}}
+        <!-- Gb Plaza, Next to Wankan
         <br />
         House 14
         <br />
@@ -27,7 +27,7 @@
         Kiambu County
         <br />
         Kenya
-        <br />
+        <br /> -->
       </nz-descriptions-item>
     </nz-descriptions>
 
@@ -39,8 +39,8 @@
 
 <ng-template #edit>
     <div class="flex flex-auto space-x-4">
-    <button nz-button nzType="primary" (click)="showModalEdit(contact)">Edit</button>
-    <button nz-button nzType="primary" nzDanger (click)="showDeleteConfirm(contact)">Delete</button>
+    <button nz-button nzType="primary" (click)="showModalEdit()">Edit</button>
+    <button nz-button nzType="primary" nzDanger (click)="showDeleteConfirm()">Delete</button>
     </div>
   </ng-template>
 

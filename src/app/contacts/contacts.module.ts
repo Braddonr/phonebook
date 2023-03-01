@@ -18,12 +18,15 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 
 @NgModule({
   declarations: [
     HomepageComponent,
-    ViewContactComponent
+    ViewContactComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzButtonModule,
     NzDescriptionsModule,
     NzPageHeaderModule,
-    NzIconModule
+    NzIconModule,
+    Ng2SearchPipeModule,
+    NzCheckboxModule
   ]
 })
 export class ContactsModule { }

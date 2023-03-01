@@ -3,46 +3,71 @@
     <nz-list-item class="flex ">
         <div class="flex flex-auto justify-between">
             <div>
-                <input type="text" id="search" 
+                <input type="text" id="search" [(ngModel)]="searchTerm" 
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                 placeholder="Search a contact" required>
             </div>
         <div class="p-2">
-            <nz-radio-group [(ngModel)]="radioValue">
+            <button *ngIf="showDelete" nz-button [nzType]="'primary'" nzDanger (click)="deleteMultipleContacts()" [nzSize]="'small'">Delete Selected
+            </button> 
+            &nbsp; &nbsp; 
+            <button nz-button [nzType]="'primary'" (click)="activateMultipleSelect()" [nzSize]="'small'">Select Multiple
+            </button>
+            &nbsp; &nbsp; &nbsp; &nbsp; 
+            View as:  &nbsp;  
+            <nz-radio-group [(ngModel)]="radioValue" (ngModelChange)="changeView()">
                 <label nz-radio nzValue="list">List</label>
                 <label nz-radio nzValue="grid">Grid</label>
               </nz-radio-group>
         </div>
         </div>
     </nz-list-item>
-    <nz-list-item *ngFor="let contact of contactList" >
+    <div *ngIf="list">
+    <nz-list-item *ngFor="let contact of contactList | filter: searchTerm">
       <ng-container>
+        <input  *ngIf="showCheckboxes" type="checkbox" id="checkbox" name="contact" (click)="checkboxValue(contact)">
+        &nbsp; &nbsp;&nbsp;
         <nz-list-item-meta
           nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-          nzDescription="Ant Design, a design language for background applications, is refined by Ant UED Team"
+          nzDescription="{{contact.firstName}}&nbsp;{{contact.lastName}}"
           (click)="view(contact)"
         >
           <nz-list-item-meta-title>
-            <a href="https://ng.ant.design">Test</a>
+            <a href="https://ng.ant.design">{{contact.firstName}}</a>
           </nz-list-item-meta-title>
         </nz-list-item-meta>
-        content
+         {{contact.email}}
         <ul nz-list-item-actions>
           <nz-list-item-action><a (click)="view(contact)">View/ More Actions</a></nz-list-item-action>
         </ul>
       </ng-container>
-      <!-- <nz-skeleton
-        [nzAvatar]="true"
-        [nzActive]="true"
-        [nzTitle]="false"
-        [nzLoading]="true"
-      ></nz-skeleton> -->
     </nz-list-item>
-    <div class="loadmore" nz-list-load-more>
-      <button nz-button> Load more</button>
     </div>
+    <div *ngIf="!list">
+        <ul class="text-lg flex flex-wrap list-none sm:px-9 lg:px-0">
+            <li *ngFor="let contact of contactList | filter: searchTerm"> 
+              <a 
+                class="bg-white px-2 py-2 m-2 w-50 h-52 border-2 border-solid border-whitesmoke rounded-none flex flex-col overflow-hidden hover: opacity-90">
+                <div class="flex space-y-2 rounded-full h-36 w-36">
+                <button (click)="view(contact)">
+                <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt=""></button>
+                </div>   
+                <div class="text-xs">
+                  <div class="text-gray-800">
+                    {{contact.firstName}}&nbsp;{{contact.lastName}}
+                  </div>
+                  <div class="text-gray-400"> 
+                    {{contact.phoneNumber}}
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
   </nz-list>
 </nz-card>
+
+
 
 <ng-template #newContact>
       <button nz-button nzType="default" (click)="showModal()"><i nz-icon nzType="plus" nzTheme="outline" style="font-size: 19px; margin-top: 0px;"></i>New Contact</button>&nbsp;
