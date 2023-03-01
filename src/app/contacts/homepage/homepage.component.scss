@@ -1,5 +1,11 @@
-//nz list styling
+//nz-spinner styling
 
+  .example {
+    text-align: center;
+  }
+
+
+//nz list styling
 .demo-loadmore-list {
     min-height: 350px;
   }
@@ -12,6 +18,15 @@
 
   ::ng-deep .ant-card-head-title {
     font-size: 24px;
+  }
+  
+  ::ng-deep .ant-avatar>img {
+    width: 60px;
+    height: 60px; 
+   }
+  ::ng-deep .ant-avatar {
+  width: 60px;
+  height: 60px;
   }
 
   input[type=password], input[type=number], input[type=text], textarea {

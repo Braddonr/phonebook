@@ -52,12 +52,19 @@ deleteSeveralContacts(ids: any ){
   fetch('http://localhost:3000/contacts?id=' + ids.join(','), {
     method: 'DELETE'
   })
-    .then(response => {
-      console.log('Items deleted successfully');
-    })
-    .catch(error => {
-      console.error('Error deleting items:', error);
-    });
+  
+  .then(res =>{
+    alert('Contact deleted Successfully')
+  })
+  .catch(error => {
+    alert('Something went wrong')
+  })
+  // .then(response => {
+    //   alert('Items deleted successfully');
+    // })
+    // .catch(error => {
+    //   alert('Error deleting items');
+    // });
   
   }
 }

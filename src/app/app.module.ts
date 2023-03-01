@@ -18,10 +18,7 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 
-
-
 import { AccountBookFill, AlertFill, AlertOutline, BackwardFill, BackwardOutline, PlusOutline} from '@ant-design/icons-angular/icons';
-
 
 
 const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill, BackwardFill, BackwardOutline, PlusOutline];
@@ -45,9 +42,7 @@ registerLocaleData(en);
     NzSkeletonModule,
     NzAvatarModule,
     NzIconModule.forRoot(icons),
-
-    
-    
+    BrowserAnimationsModule 
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

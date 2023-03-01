@@ -44,7 +44,7 @@
     </div>
   </ng-template>
 
-  <nz-modal [(nzVisible)]="isVisibleEdit" nzTitle="Edit Contact" (nzOnCancel)="handleCancelEdit()" (nzOnOk)="handleOkEdit()" [nzStyle]="{ top: '80px', width: '600px' }">
+  <nz-modal [(nzVisible)]="isVisibleEdit" nzTitle="Edit Contact" (nzOnCancel)="handleCancelEdit()" (nzOnOk)="handleOkEdit()" nzOkText="Edit Contact" [nzStyle]="{ top: '80px', width: '600px' }">
     <ng-container *nzModalContent>
         <form nz-form [formGroup]="formEdit">
             <nz-form-item>

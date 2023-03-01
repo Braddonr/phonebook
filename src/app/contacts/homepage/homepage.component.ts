@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { ContactModel } from 'src/app/shared/models/contact.model';
 import { ContactService } from 'src/app/shared/services/contact.service';
 
@@ -26,9 +27,11 @@ export class HomepageComponent implements OnInit {
   showCheckboxes = false;
   showDelete = false; 
   deleteIds: any[] =[];
+  loading = false;
 
   constructor(
     private http: HttpClient, 
+    private modal: NzModalService,
     private contacts: ContactService,
     private msg: NzMessageService, 
     private formBuilder: FormBuilder,
@@ -47,8 +50,10 @@ export class HomepageComponent implements OnInit {
   }
 
   getContacts() {
+  this.loading= true;
   this.contacts.getAllContacts()
  .subscribe(res => {
+  this.loading= false;
   this.contactList = res;
 
   //sort alphabetically
@@ -128,10 +133,12 @@ console.log(this.contactList);
   this.contactModelObj.email = this.formAdd.value.email
   this.contactModelObj.physicalAddress = this.formAdd.value.physicalAddress
 
+  this.loading= true;
   this.contacts.postContact(this.contactModelObj)
   .subscribe(res =>{
   console.log(res);
   alert('New Contact has been added successfully')
+  this.loading= false;
   this.formAdd.reset();
   }, 
   err =>{
@@ -141,9 +148,11 @@ console.log(this.contactList);
 
 
   deleteContact(contact: any){
+  this.loading = true;
   this.contacts.deleteContact(contact.id)
   .subscribe(res =>{
     alert('Contact deleted Successfully')
+    this.loading = false;
     this.getContacts()
   },
   err =>{
@@ -151,8 +160,50 @@ console.log(this.contactList);
   })
   }
 
+  showDeleteConfirm(): void {
+    this.modal.confirm({
+      nzTitle: 'Delete contact',
+      nzContent: '<p style="color: red;">Are you sure you want to delete these contacts?</p>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.deleteMultipleContacts(),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
+  }
+
   deleteMultipleContacts(){
-   this.contacts.deleteSeveralContacts(this.deleteIds)
+  //  this.contacts.deleteSeveralContacts(this.deleteIds)
+  //  this.getContacts()
+  //  !this.showCheckboxes 
+
+  this.deleteIds.forEach(id => {
+    
+    fetch(`http://localhost:3000/contacts/${id}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      this.loading = false;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+        console.log('testing');
+        
+      }
+      else if (response.ok){
+        console.log('testing');
+        alert("Contacts have been successfully deleted")
+        this.showCheckboxes = false;
+        this.showDelete = false;
+        this.router.navigate(['/contacts/home'])
+        this.getContacts();
+      }
+    })
+    .catch(error => {
+      console.log('testing');
+      console.error('Error:', error);
+    });
+  });
   }
 
   changeView(){

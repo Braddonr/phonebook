@@ -20,6 +20,7 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
     NzPageHeaderModule,
     NzIconModule,
     Ng2SearchPipeModule,
-    NzCheckboxModule
+    NzCheckboxModule,
+    NzSpinModule
   ]
 })
 export class ContactsModule { }
