@@ -140,6 +140,7 @@ console.log(this.contactList);
   alert('New Contact has been added successfully')
   this.loading= false;
   this.formAdd.reset();
+  this.getContacts();
   }, 
   err =>{
   alert('Something went wrong')
@@ -181,23 +182,21 @@ console.log(this.contactList);
   this.deleteIds.forEach(id => {
     
     fetch(`http://localhost:3000/contacts/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
     .then(response => {
       this.loading = false;
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-        console.log('testing');
-        
+        throw new Error(`HTTP error! status: ${response.status}`);    
       }
-      else if (response.ok){
-        console.log('testing');
         alert("Contacts have been successfully deleted")
         this.showCheckboxes = false;
         this.showDelete = false;
         this.router.navigate(['/contacts/home'])
         this.getContacts();
-      }
     })
     .catch(error => {
       console.log('testing');

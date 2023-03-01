@@ -2,59 +2,27 @@
   "contacts": [
     {
       "id": 1,
-      "firstName": "Wilburt",
-      "lastName": "Caen",
-      "email": "wcaen0@google.com.hk",
-      "phoneNumber": "127-827-6975",
-      "physicalAddress": "27515 Hauk Center"
+      "firstName": "Bradd",
+      "lastName": "R",
+      "phoneNumber": "0701829413",
+      "email": "braddonrr@gmail.com",
+      "physicalAddress": "980 Nairobi"
+    },
+    {
+      "id": 2,
+      "firstName": "Bradd",
+      "lastName": "R",
+      "phoneNumber": "0701829413",
+      "email": "braddonrr@gmail.com",
+      "physicalAddress": "980 Nairobi"
     },
     {
       "id": 3,
-      "firstName": "Rowland",
-      "lastName": "Pordal",
-      "email": "rpordal2@mtv.com",
-      "phoneNumber": "492-120-4372",
-      "physicalAddress": "0 Sundown Terrace"
-    },
-    {
-      "id": 6,
-      "firstName": "Sara",
-      "lastName": "Twigger",
-      "email": "stwigger5@so-net.ne.jp",
-      "phoneNumber": "451-789-5587",
-      "physicalAddress": "1 Tony Drive"
-    },
-    {
-      "id": 13,
-      "firstName": "Rivkah",
-      "lastName": "Macconachy",
-      "email": "rmacconachyc@adobe.com",
-      "phoneNumber": "880-301-5545",
-      "physicalAddress": "41 Stang Lane"
-    },
-    {
-      "id": 16,
-      "firstName": "Willie",
-      "lastName": "Van Leeuwen",
-      "email": "wvanleeuwenf@amazon.co.uk",
-      "phoneNumber": "843-160-2653",
-      "physicalAddress": "009 Nelson Hill"
-    },
-    {
-      "id": 19,
-      "firstName": "Shandie",
-      "lastName": "Yeats",
-      "email": "syeatsi@ftc.gov",
-      "phoneNumber": "113-896-5715",
-      "physicalAddress": "582 Colorado Lane"
-    },
-    {
-      "id": 21,
-      "firstName": "Rotich",
-      "lastName": "Rotich",
-      "phoneNumber": "0704190198",
-      "email": "hgh908@gmail.com",
-      "physicalAddress": "Ruiru, Kiambu"
+      "firstName": "Joseph",
+      "lastName": "Reacher",
+      "phoneNumber": "0701829413",
+      "email": "braddonrr@gmail.com",
+      "physicalAddress": "1267"
     }
   ]
 }

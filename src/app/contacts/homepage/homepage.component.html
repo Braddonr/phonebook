@@ -64,6 +64,9 @@
                   <div class="text-gray-400"> 
                     {{contact.phoneNumber}}
                   </div>
+                  <div class="text-center items-center justify-center space-y-2">
+                    <input  *ngIf="showCheckboxes" type="checkbox" id="checkbox" name="contact" (click)="checkboxValue(contact)">
+                  </div>
                 </div>
               </a>
             </li>
