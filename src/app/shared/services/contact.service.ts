@@ -59,12 +59,5 @@ deleteSeveralContacts(ids: any ){
   .catch(error => {
     alert('Something went wrong')
   })
-  // .then(response => {
-    //   alert('Items deleted successfully');
-    // })
-    // .catch(error => {
-    //   alert('Error deleting items');
-    // });
-  
-  }
+ }
 }

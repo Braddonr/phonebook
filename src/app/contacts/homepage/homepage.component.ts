@@ -25,7 +25,8 @@ export class HomepageComponent implements OnInit {
   isCheckedButton = true;
   isDisabledButton = false;
   showCheckboxes = false;
-  showDelete = false; 
+  showDelete = false;
+  isChecked = false; 
   deleteIds: any[] =[];
   loading = false;
 
@@ -86,10 +87,13 @@ console.log(this.contactList);
   }
 
  checkboxValue(contact: any){
-  this.showDelete = this.showCheckboxes;  
+  this.isChecked = !this.isChecked;
+  this.showDelete = this.showCheckboxes;
   
+  if(!this.deleteIds.includes(contact.id)){
   this.deleteIds.push(contact.id)
   console.log(this.deleteIds);
+}
   
 }
 
@@ -175,34 +179,33 @@ console.log(this.contactList);
   }
 
   deleteMultipleContacts(){
-  //  this.contacts.deleteSeveralContacts(this.deleteIds)
-  //  this.getContacts()
-  //  !this.showCheckboxes 
 
-  this.deleteIds.forEach(id => {
-    
-    fetch(`http://localhost:3000/contacts/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      this.loading = false;
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);    
-      }
-        alert("Contacts have been successfully deleted")
-        this.showCheckboxes = false;
-        this.showDelete = false;
-        this.router.navigate(['/contacts/home'])
+  const baseUrl = 'http://localhost:3000/contacts/'; // base URL of JSON server
+  
+  Promise.all(this.deleteIds.map(id => {
+    const url = `${baseUrl}${id}`;
+    return fetch(url, {
+       method: 'DELETE',
+       headers: {
+              'Content-Type': 'application/json'
+            } 
+      })
+      .then(response => {
+        this.loading= true;
+        if (!response.ok) {
+          throw new Error(`Failed to delete ID ${id}`);
+        }
         this.getContacts();
-    })
-    .catch(error => {
-      console.log('testing');
-      console.error('Error:', error);
-    });
-  });
+        return response.json();
+      })
+      .then(data => {alert(`Successfully deleted ID ${id}`)})
+      .catch(error => alert(`Error deleting ID ${id}:`));
+  }))
+    .then(() => alert('Selected contacts deleted successfully'))
+    .catch(error => alert('At least one request failed:'));
+    this.loading = false;
+    this.showCheckboxes = false;
+    this.showDelete = false;  
   }
 
   changeView(){
