@@ -10,6 +10,10 @@
             </div>
             <nz-spin *ngIf="loading" nzSimple [nzSize]="'large'" style="text-align: center;"></nz-spin>
             <div class="p-2">
+              <input type="file" name="file" id="file" (change)="onFileChanged($event)" />
+              <button nz-button [nzType]="'primary'" (click)="uploadFile(file)" [nzSize]="'small'">Upload
+              </button> 
+
             <button *ngIf="showDelete" nz-button [nzType]="'primary'" nzDanger (click)=" showDeleteConfirm()" [nzSize]="'small'">Delete Selected
             </button> 
             &nbsp; &nbsp; 

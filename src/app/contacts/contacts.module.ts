@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ViewContactComponent } from './view-contact/view-contact.component';
@@ -21,7 +21,10 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { ContactService } from '../shared/services/contact.service';
 
+
+@Injectable({ providedIn: 'root' })
 
 @NgModule({
   declarations: [
@@ -51,6 +54,11 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     Ng2SearchPipeModule,
     NzCheckboxModule,
     NzSpinModule
-  ]
+  ],
+  exports: [
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [ FormData]
 })
 export class ContactsModule { }

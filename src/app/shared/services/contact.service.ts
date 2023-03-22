@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
+
 export class ContactService {
+
+  SERVER_URL: string = "https://file.io/"
 
   constructor(private http: HttpClient) { }
 
@@ -60,4 +61,14 @@ deleteSeveralContacts(ids: any ){
     alert('Something went wrong')
   })
  }
+
+
+ upload(formData: any) {
+
+	return this.http.post<any>(this.SERVER_URL, formData, {  
+      reportProgress: true,  
+      observe: 'events'  
+    });  
+}
+ 
 }

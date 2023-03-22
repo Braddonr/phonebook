@@ -1,11 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { map, catchError, of } from 'rxjs';
 import { ContactModel } from 'src/app/shared/models/contact.model';
 import { ContactService } from 'src/app/shared/services/contact.service';
+
 
 @Component({
   selector: 'app-homepage',
@@ -14,6 +16,7 @@ import { ContactService } from 'src/app/shared/services/contact.service';
 })
 export class HomepageComponent implements OnInit {
 
+  
   contactList: any= [];
   sortedList: any= [];
   radioValue = 'list';
@@ -30,13 +33,17 @@ export class HomepageComponent implements OnInit {
   deleteIds: any[] =[];
   loading = false;
 
+  public files: any[] = [];
+  file: any;
+  
   constructor(
     private http: HttpClient, 
     private modal: NzModalService,
     private contacts: ContactService,
     private msg: NzMessageService, 
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private f : FormData
     ) { }
 
   ngOnInit(): void {
@@ -49,6 +56,37 @@ export class HomepageComponent implements OnInit {
     });
   this.getContacts();
   }
+
+
+onFileChanged(event: any) {
+  if (event.target.files.length > 0) {
+    const file = event.target.files[0];
+    this.uploadFile(file);
+  }
+}
+
+uploadFile(file: File) {
+  const formData = new FormData();
+  formData.append('file', file);
+  
+  console.log(formData.get('file'));
+
+  this.formAdd.patchValue({
+    imageUrl: formData
+  });
+  console.log(this.formAdd.value);
+  
+  
+
+  // this.http.post<any>('your-backend-url', formData).subscribe(
+  //   (res) => {
+  //     console.log(res.path);
+  //   },
+  //   (err) => console.log(err)
+  // );
+}
+
+
 
   getContacts() {
   this.loading= true;
